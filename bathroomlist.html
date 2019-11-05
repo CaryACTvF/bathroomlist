@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Bathroom List</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Lobster|Open+Sans&display=swap" rel="stylesheet">
+
+	<style type="text/css">
+		* {
+			font-family: 'Open Sans', sans-serif;
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0px;
+			padding: 0px;
+			background: linear-gradient(90deg, red, blue);
+		}
+
+		#content {
+			padding: 20px;
+			width: 500px;
+			background: white;
+			margin: 20px auto;
+			border-radius: 5px;
+			box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+		}
+
+		#columns {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.column {
+			padding-left: 10px;
+		}
+
+		h1 {
+			font-family: 'Lobster', cursive;
+			text-align: center;
+		}
+
+		ul {
+			margin: 0px;
+			padding: 0px;
+		}
+
+		li {
+			cursor: pointer;
+			list-style-position: inside;
+			padding: 15px 10px;
+			margin: 0px;
+			list-style-type: none;
+			background: gold;
+			box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+			width: 90%;
+		}
+
+		.left-column {
+			border-right: 2px solid black;
+		}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<h1>Bathroom List App</h1>
+		<div id="columns">
+			<div class="column left-column" id="roster-column">
+				<h2>Roster List</h2>
+				<ul id="roster-list">
+					
+				</ul>
+			</div>
+			<div class="column right-column" id="bathroom-column">
+				<h2>Bathroom List</h2>
+				<ul id="bathroom-list">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		let roster_array = [
+			"Gabriel Alrubayi",
+			"Chayse Conte",
+			"Saiss Cruz-Santana",
+			"Jeimy Cuevas",
+			"Christian Garcia",
+			"Ivanna Guevara Manjarr",
+			"Townsend Kulesz",
+			"Devendra Kurdiya",
+			"Charlise Lebron",
+			"Peter Leszko",
+			"Jakub Lysakowski",
+			"Brayan Martinez",
+			"Montserrat Muñoz",
+			"Theo Orecchio",
+			"Kevaughn Plunkett",
+			"Amanda Portorreal",
+			"Heisa Pulagarin",
+			"Kelly Quishpi Quishpe",
+			"Anna Ramirez",
+			"Katherine Ramirez Rendon",
+			"Justin Soler",
+			"Mia Trimboli",
+			"Edwin Vargas",
+			"Marlon Xavier",
+			"Isaac Zapata",
+			"Matthew Zapata"
+		]
+		roster_array = roster_array.sort()
+
+		let bathroom_array = [];
+
+		let roster_list = document.querySelector("#roster-list");
+		let bathroom_list = document.querySelector("#bathroom-list");
+
+		function load_lists() {
+			roster_list.innerHTML = "";
+			bathroom_list.innerHTML = "";
+
+			roster_array.forEach(student => {
+				student_element = document.createElement("li");
+				student_element.innerHTML = student;
+				student_element.classList.add("student");
+				student_element.classList.add("roster");
+
+				student_element.addEventListener("click", function(e) {
+					let student = e.target.innerHTML;
+					let index = roster_array.indexOf(student);
+
+					if (index > -1) {
+						roster_array.splice(index, 1);
+					}
+
+					bathroom_array.push(student);
+					load_lists();
+				})
+
+				roster_list.appendChild(student_element);
+			})
+
+			bathroom_array.forEach(student => {
+				student_element = document.createElement("li");
+				student_element.innerHTML = student;
+				student_element.classList.add("student");
+				student_element.classList.add("bathroom");
+
+				student_element.addEventListener("click", function(e) {
+					let student = e.target.innerHTML;
+					let index = bathroom_array.indexOf(student);
+
+					if (index > -1) {
+						bathroom_array.splice(index, 1);
+					}
+
+					roster_array.push(student);
+					roster_array = roster_array.sort()
+					load_lists();
+				})
+
+				bathroom_list.appendChild(student_element);
+			})
+		}
+
+		document.addEventListener('DOMContentLoaded', (event) => {
+		    load_lists();
+		});
+
+
+
+
+	</script>
+</body>
+</html>
