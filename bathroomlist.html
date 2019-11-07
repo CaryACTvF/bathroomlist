@@ -78,11 +78,22 @@
 		  	width: 290px;
 		  }
 		}
+
+		select {
+			display: block;
+			margin: auto;
+		}
 	</style>
 </head>
 <body>
 	<div id="content">
 		<h1>Bathroom List App</h1>
+		<select class="_class">
+			<option value="a2b5">Algebra 2 - Block 5</option>
+			<option value="apcspb3">APCSP - Block 3</option>
+			<option value="apcspb4">APCSP - Block 4</option>
+		</select>
+
 		<div id="columns">
 			<div class="column left-column" id="roster-column">
 				<h2>Roster List</h2>
@@ -100,7 +111,9 @@
 	</div>
 
 	<script type="text/javascript">
-		let roster_array = [
+		let roster_array = []
+
+		let a2b5 = [
 			"Gabriel Alrubayi",
 			"Chayse Conte",
 			"Saiss Cruz-Santana",
@@ -128,12 +141,82 @@
 			"Isaac Zapata",
 			"Matthew Zapata"
 		]
-		roster_array = roster_array.sort()
 
+		let apcspb3 = [
+			"Jasmine Alrubayi",
+			"Jayson Arreaga",
+			"Camilo Calderon",
+			"Justin Colon",
+			"Maria Corallo",
+			"Alanis Delanueces",
+			"Paige Fanelli",
+			"Nadia Gonzalez",
+			"Jack Haake",
+			"Taylor Johnson",
+			"Monique Lilly",
+			"Tyana Mckenzie",
+			"Brenda Mendoza",
+			"Jeffrey Meyo",
+			"Joseph Mulligan",
+			"Samuel Patterson",
+			"William Perez-Rodriguez",
+			"Trey Petgrave",
+			"Milo Reyes",
+			"Jeffrey Stewartbartlett",
+			"Joshua Vargas",
+			"Juan Sanchez",
+			"Sierra Warren",
+			"Lauren Wise",
+		]
+
+		let apcspb4 = [
+			"Lion Barisri",
+			"Kevin Benalcazar",
+			"Tommy Benitez",
+			"Victoria Camela",
+			"Angel Chaca Rosendo",
+			"Ashley D'Onogrio",
+			"Miles Estwisk",
+			"Peter Gaveglia",
+			"Carol Guachichulca",
+			"Nayeli Humala",
+			"Adjah John",
+			"Eve Langdale",
+			"Amanda Lopez",
+			"Matthew Marmol",
+			"Laura Martinez",
+			"Rodolfo Palaquibay",
+			"Gabriel Perez",
+			"Jestin Pigao",
+			"Andrea Plaza",
+			"Akhyar Rahman",
+			"Samantha Salvatierra",
+			"Ismael Sinani",
+			"Montserrat Tacuri",
+			"Ronald Tibball",
+			"Tyler To",
+			"Trinese Warren",
+			"Samiyah Williams",
+			"Ryo Yatogo",
+			"Marc Yauri",
+			"Adam Zednik",
+			"William Deloatch",
+		]
+
+		let selector = document.querySelector("select");
 		let bathroom_array = [];
-
 		let roster_list = document.querySelector("#roster-list");
 		let bathroom_list = document.querySelector("#bathroom-list");
+
+		selector.addEventListener("change", function(e) {
+			_class = e.target.value;
+			
+			roster_array = eval(_class);
+			roster_array = roster_array.sort()
+			bathroom_array = [];
+
+			load_lists()
+		})
 
 		function load_lists() {
 			roster_list.innerHTML = "";
@@ -182,8 +265,6 @@
 				bathroom_list.appendChild(student_element);
 			})
 		}
-
-		load_lists();
 
 
 
